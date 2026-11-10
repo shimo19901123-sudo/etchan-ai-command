@@ -1,0 +1,14 @@
+{
+  "name": "えっちゃん AI司令室",
+  "short_name": "AI司令室",
+  "description": "16人のAI社員とプロジェクトを一つにまとめるダッシュボード",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0a0e1b",
+  "theme_color": "#0c1226",
+  "icons": [
+    {"src":"./icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"./icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}

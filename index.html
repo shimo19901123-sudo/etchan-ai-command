@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0c1226">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AI司令室">
+  <meta name="description" content="16人のAI社員・プロジェクト・ToDoを一つにまとめる個人用ダッシュボード">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icons/icon-180.png">
+  <title>えっちゃん AI司令室</title>
+  <style>
+  :root{--bg:#0a0e1b;--panel:#131a2e;--panel2:#19223a;--border:#293451;--text:#f2f5ff;--muted:#a2aec6;--purple:#9c85ff;--teal:#4de4d1;--danger:#ff8c98;--amber:#f7c571;--radius:18px}
+  *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:radial-gradient(ellipse at 8% 0,#1d2354 0,transparent 40%),radial-gradient(ellipse at 100% 30%,#132b3b 0,transparent 48%),var(--bg);color:var(--text);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;min-height:100vh;min-height:100dvh}
+  button,input,textarea,select{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+  a{color:inherit;text-decoration:none} .shell{max-width:1100px;margin:auto;padding:22px 20px 120px} .topbar{display:flex;gap:15px;justify-content:space-between;align-items:center;padding:8px 0 24px} .brand{display:flex;align-items:center;gap:12px;min-width:0} .mark{display:grid;place-items:center;width:49px;height:49px;border-radius:16px;background:linear-gradient(140deg,#a989ff,#50e2d4);color:#071323;font-weight:1000;font-size:22px;box-shadow:0 5px 30px #8074ff55}
+  .brand .tiny{font-size:11px;font-weight:800;letter-spacing:.18em;color:var(--teal)}h1{margin:0;font-size:21px;letter-spacing:-.035em}h2{margin:0;font-size:18px}h3{margin:0;font-size:15px}p{margin:0}.muted{color:var(--muted)}.small{font-size:12px}.tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:5px 10px;border-radius:100px;border:1px solid #476071;background:#1a3440;color:#bdf2e8}.dot{width:7px;height:7px;border-radius:50%;background:var(--teal)}
+  .nav{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;border:1px solid var(--border);background:#101729c7;padding:6px;border-radius:18px;margin-bottom:20px}.nav::-webkit-scrollbar{display:none}.tab-btn{flex:1;min-width:104px;border:0;color:var(--muted);border-radius:12px;padding:10px 15px;background:transparent;white-space:nowrap;font-weight:700}.tab-btn.active{background:#2b355b;color:white;box-shadow:inset 0 0 0 1px #485784}
+  .panel{background:linear-gradient(145deg,#19213aee,#11182bec);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:0 12px 35px #04070f28}.hero{background:linear-gradient(115deg,#28285c,#122742 80%);border:1px solid #45457d;padding:26px;border-radius:22px;position:relative;overflow:hidden}.hero::after{content:"";position:absolute;width:250px;height:250px;border:1px solid #a98cff33;border-radius:50%;right:-60px;top:-110px;box-shadow:0 0 0 45px #a98cff0b,0 0 0 95px #a98cff08;pointer-events:none}.eyebrow{color:#b8c3ff;font-size:12px;letter-spacing:.13em;font-weight:800}.hero h2{font-size:clamp(23px,4vw,31px);margin:7px 0 8px}.hero p{position:relative;z-index:1;max-width:610px;color:#c6d2ef}.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;position:relative;z-index:1}.btn{border:1px solid #485577;border-radius:12px;padding:11px 16px;color:var(--text);background:#222c48;font-weight:750;min-height:44px}.btn:hover{background:#303c61}.btn.primary{background:linear-gradient(100deg,#a18bff,#63d9e3);color:#111c33;border:0}.btn.ghost{background:transparent}.btn.warn{border-color:#795364;color:#ffc5cf}.btn:disabled{opacity:.45;cursor:not-allowed}.linkbtn{display:inline-flex;justify-content:center;align-items:center}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin:16px 0 20px}.stat{padding:15px 16px;border:1px solid var(--border);border-radius:16px;background:#151d32}.stat strong{display:block;font-size:27px;line-height:1.3;font-variant-numeric:tabular-nums}.stat span{font-size:12px;color:var(--muted)}.section-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}.section-title{margin-bottom:13px}.grid2{display:grid;grid-template-columns:1.25fr 1fr;gap:16px}.stack{display:grid;gap:16px}.field{display:grid;gap:6px}.field label,.input-label{font-size:12px;color:#b8c5dd;font-weight:750}.input,.textarea,.select{width:100%;background:#0b1224;border:1px solid #344362;border-radius:12px;color:var(--text);padding:12px 13px;outline:none}.textarea{min-height:115px;resize:vertical}.input::placeholder,.textarea::placeholder{color:#7e8ba6}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.row>*{min-width:0}.hint{font-size:12px;color:var(--muted);margin-top:8px}.notice{background:#2e2840;border:1px solid #6b5474;border-radius:12px;padding:10px 14px;color:#efd6f7;font-size:12px}.safe{background:#173337;border-color:#33615c;color:#bdebe5}.templates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.template{border:1px solid #394666;background:#172139;text-align:left;color:#dfe7ff;padding:12px;border-radius:12px;font-weight:700}.template:hover{border-color:var(--purple);background:#212d4e}.template .sub{display:block;font-size:11px;color:var(--muted);font-weight:500}
+  .agent-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.agent{display:flex;flex-direction:column;gap:10px;background:#141d32;border:1px solid var(--border);border-radius:16px;padding:16px;min-height:180px}.agent-top{display:flex;gap:11px;align-items:center}.avatar{width:40px;height:40px;border-radius:14px;background:linear-gradient(120deg,#5e558f,#273f6a);display:grid;place-items:center;font-size:20px;flex-shrink:0}.agent p{font-size:12px;color:var(--muted);flex:1}.agent .btn{font-size:12px;padding:7px 12px;min-height:38px}.role-num{font-size:11px;color:var(--teal)}
+  .project-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.project{display:flex;flex-direction:column;gap:10px;background:#151d33;border:1px solid var(--border);padding:17px;border-radius:16px}.project-header{display:flex;gap:11px;align-items:center}.project-icon{font-size:25px}.project .spacer{flex:1}.empty{border:1px dashed #526080;border-radius:12px;padding:15px;text-align:center;font-size:13px;color:var(--muted)}
+  .todo-input{display:flex;gap:8px}.todo-input input{flex:1}.todo-list{display:grid;gap:9px}.todo{display:flex;align-items:center;gap:10px;background:#10192b;border:1px solid var(--border);padding:10px 12px;border-radius:13px}.todo.done .todo-title{text-decoration:line-through;color:#7c899f}.todo-title{flex:1;min-width:0;overflow-wrap:anywhere}.todo-remove{border:0;background:transparent;color:#d39ca8;padding:4px 7px;font-size:18px}.check{width:22px;height:22px;accent-color:#63d9e3}.schedule{display:grid;gap:9px}.schedule-item{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid var(--border);padding:12px;border-radius:12px;background:#121d33}.schedule-item strong{font-size:14px}.schedule-item span{font-size:12px;color:var(--muted);text-align:right}.settings-grid{display:grid;gap:12px}.setting-item{display:grid;grid-template-columns:1fr 2fr;gap:10px;align-items:center}.setting-item span{font-size:13px;color:#c6d0e5}.badge-local{font-size:11px;color:#b9d4ca;border:1px solid #385a57;border-radius:20px;padding:3px 9px}.footer{padding:25px 0 0;text-align:center;color:#7e8da9;font-size:11px}
+  .hidden,[hidden]{display:none!important}.toast{position:fixed;bottom:25px;left:50%;transform:translateX(-50%) translateY(80px);opacity:0;background:#e4fff7;color:#0b2c29;padding:11px 18px;border-radius:14px;font-weight:800;box-shadow:0 10px 30px #0008;z-index:9;transition:.2s;pointer-events:none;max-width:90vw}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media(max-width:760px){.shell{padding:16px 14px 100px}.topbar{padding:5px 0 18px}.topbar .tag{display:none}.brand h1{font-size:19px}.grid2{grid-template-columns:1fr}.agent-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding:23px 20px}.nav{margin-left:-2px;margin-right:-2px}.tab-btn{min-width:94px;font-size:13px}.panel{padding:16px}}
+  @media(max-width:480px){.agent-grid,.project-list,.templates{grid-template-columns:1fr}.setting-item{grid-template-columns:1fr;gap:4px}.agent{min-height:0}.agent p{flex:auto}.topbar .small{display:none}.row>.btn{flex:auto}.schedule-item{align-items:flex-start;flex-direction:column}.schedule-item span{text-align:left}.stat strong{font-size:24px}}
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar"><div class="brand"><div class="mark">E</div><div><div class="tiny">ETCHAN AI COMPANY</div><h1>えっちゃん AI司令室</h1><div class="small muted">16人のAI社員 × プロジェクト × ToDo</div></div></div><span class="tag"><span class="dot"></span>ローカル管理 v1.0</span></header>
+    <nav class="nav" role="tablist" aria-label="画面切り替え">
+      <button class="tab-btn active" data-tab="home" role="tab" aria-selected="true">⌂ ホーム</button><button class="tab-btn" data-tab="agents" role="tab" aria-selected="false">✦ AI社員</button><button class="tab-btn" data-tab="projects" role="tab" aria-selected="false">▦ アプリ</button><button class="tab-btn" data-tab="tasks" role="tab" aria-selected="false">☑ ToDo</button><button class="tab-btn" data-tab="settings" role="tab" aria-selected="false">⚙ 設定</button>
+    </nav>
+    <main>
+      <section id="home" class="view">
+        <div class="hero"><div class="eyebrow">WELCOME TO YOUR COMMAND CENTER</div><h2>やりたいことは、ここから。</h2><p>役割を選んで依頼文を作成。既存アプリの入口とToDoをひとまとめ。元のプロジェクトは変更しません。</p><div class="hero-actions"><button class="btn primary" id="hero-compose">AI社員に依頼する</button><button class="btn ghost" data-go="projects">アプリ一覧を見る</button></div></div>
+        <div class="stats"><div class="stat"><strong>16</strong><span>AI社員の役割</span></div><div class="stat"><strong id="stat-projects">0</strong><span>登録済みアプリURL</span></div><div class="stat"><strong id="stat-tasks">0</strong><span>未完了ToDo</span></div><div class="stat"><strong>4</strong><span>既存通知の参照欄</span></div></div>
+        <div class="grid2">
+          <div class="panel" id="composer"><div class="section-top"><h2>✦ AI社員に依頼</h2><span class="badge-local">指示文を生成</span></div>
+            <div class="stack" style="gap:12px">
+              <div class="field"><label for="mode">依頼先</label><select id="mode" class="select"><option value="auto">えっちゃん（内容に応じて担当を割り振る）</option></select></div>
+              <div class="field"><label for="request">やってほしいこと</label><textarea id="request" class="textarea" placeholder="例：株アプリに目標価格と損切り価格を表示したい。既存機能を維持して修正案を作って。"></textarea></div>
+              <div class="row"><button class="btn primary" id="generate">依頼文を作る</button><button class="btn" id="mic" title="対応環境のみ">🎙 音声入力</button></div>
+              <div class="field"><label for="prompt">生成した依頼文（内容を確認してから利用）</label><textarea id="prompt" class="textarea" style="min-height:170px" readonly placeholder="ここに依頼文が表示されます"></textarea></div>
+              <div class="row"><button class="btn" id="copy-prompt">依頼文をコピー</button><a class="btn linkbtn ghost" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">ChatGPTを開く ↗</a></div>
+              <p class="hint">※ これは依頼文の作成機能です。AIへの自動送信・自動実行・ChatGPT会話の同期は行いません。</p>
+            </div>
+          </div>
+          <div class="stack">
+            <div class="panel"><h2 class="section-title">⚡ よく使う依頼</h2><div class="templates" id="templates"></div></div>
+            <div class="panel"><h2 class="section-title">🔒 会社データの扱い</h2><div class="notice">会社でChatGPT利用が禁止されている場合、業務情報・個人情報・社内ファイルをここからChatGPTへ送信しないでください。社内作業は承認されたCopilotとOneDriveで分離して運用してください。</div><p class="hint">本アプリは入力内容を自動送信しません。ただし、この端末のブラウザ内には保存する情報があります。</p></div>
+          </div>
+        </div>
+      </section>
+      <section id="agents" class="view hidden"><div class="section-top"><div><h2>16人のAI社員</h2><p class="muted small">既存の専門分野を維持して依頼文を作成します</p></div></div><div class="agent-grid" id="agent-grid"></div></section>
+      <section id="projects" class="view hidden"><div class="section-top"><div><h2>アプリ・プロジェクト</h2><p class="muted small">URLを設定すると、ここから各アプリを開けます。既存データには手を加えません。</p></div><button class="btn" data-go="settings">URLを設定</button></div><div class="project-list" id="project-grid"></div></section>
+      <section id="tasks" class="view hidden"><div class="grid2"><div class="panel"><h2 class="section-title">☑ ToDo 管理</h2><form class="todo-input" id="todo-form"><input class="input" id="todo-text" required maxlength="180" placeholder="新しいToDoを入力"><button class="btn primary" type="submit">追加</button></form><div class="row" style="justify-content:space-between;margin:15px 0"><span class="small muted" id="task-count"></span><button class="btn ghost" style="padding:6px 9px;min-height:32px" id="hide-done">完了を非表示</button></div><div class="todo-list" id="todo-list"></div><p class="hint">このToDoは端末内で管理します。ChatGPTの通知タスクとは自動同期しません。</p></div>
+      <div class="panel"><h2 class="section-title">⏰ 既存の通知メモ</h2><p class="muted small" style="margin-bottom:13px">過去に設定した内容の控えです。現在の稼働状況を自動取得していません。</p><div class="schedule"><div class="schedule-item"><strong>やる事リスト通知</strong><span>毎日 8:00・12:00・20:00</span></div><div class="schedule-item"><strong>AI社員・週次品質改善</strong><span>金曜 19:00</span></div><div class="schedule-item"><strong>金曜スイング振り返り</strong><span>金曜 22:00</span></div><div class="schedule-item"><strong>スイング候補5銘柄</strong><span>日曜 21:00</span></div></div><a class="btn linkbtn" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" style="margin-top:15px">ChatGPTで通知を確認 ↗</a></div></div></section>
+      <section id="settings" class="view hidden"><div class="stack"><div class="panel"><h2 class="section-title">🔗 アプリのURL設定</h2><p class="muted small" style="margin-bottom:12px">使っているアプリの正しいURLを貼り付けて保存してください。空欄なら起動ボタンは無効です。</p><div class="settings-grid" id="link-settings"></div><div class="row" style="margin-top:16px"><button class="btn primary" id="save-settings">URLを保存</button></div></div>
+        <div class="panel"><h2 class="section-title">📦 バックアップ・復元</h2><p class="muted small">ToDo・設定URLをJSON形式で保存します。複数端末では自動同期しません。</p><div class="row" style="margin-top:14px"><button class="btn" id="export">バックアップ保存</button><button class="btn" id="import-btn">バックアップ読込</button><input type="file" id="import-file" accept="application/json,.json" hidden></div></div>
+        <div class="panel"><h2 class="section-title">🛡️ 安全・対応範囲</h2><p class="muted">この初期版はログインなし・外部DBなし・追跡機能なし。ToDo、リンク設定はこのブラウザの保存領域（localStorage）に保存します。端末のデータ消去で失われる場合があります。機密情報やAPIキーは入力しないでください。</p><p class="muted small" style="margin-top:10px">音声入力はブラウザの音声認識機能が使える場合のみ動作し、処理方法は端末・ブラウザに依存します。会社の機密情報には使用しないでください。</p></div>
+      </div></section>
+    </main><footer class="footer">ETCHAN AI COMMAND · v1.0 · 元アプリは変更せず、まず入口から統合</footer>
+  </div><div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script>
+  'use strict';
+  const ROLES = [
+    ['えっちゃん','総括リーダー','全体統括・要件整理・担当選定・品質判断','👑'],
+    ['玲奈','企画・情報収集','企画立案・情報整理・根拠の確認','🔎'],
+    ['もも','LINEスタンプ制作','キャラクター固定・スタンプ制作・文字・透過確認','🎨'],
+    ['莉子','Instagram運用','リール構成・投稿文・訴求改善','📱'],
+    ['涼香','販売戦略','販売導線・価格・商品訴求の改善','📈'],
+    ['彩音','海外展開','英訳・海外向け商品表現・文化確認','🌏'],
+    ['菜々','商品管理','商品一覧・進捗・素材の管理','🗂️'],
+    ['凛','Excel・VBA','既存関数・マクロ・帳票・印刷設定を保護した改善','📊'],
+    ['千尋','電気試験技術','試験原理・測定条件・安全・規格根拠の検討','⚡'],
+    ['美羽','アプリ開発','iPhone・iPad・PC対応UIと既存機能維持','💻'],
+    ['紬','GitHub・自動化','GitHub管理・Python・自動化・復元手順','🔧'],
+    ['麗華','株式スイング分析','需給・テクニカル・リスク・結果検証','📉'],
+    ['夏希','ボートレース分析','選手・機力・オッズ・期待値・結果検証','🚤'],
+    ['ひまり','楽天ROOM','商品紹介・投稿・導線改善','🛍️'],
+    ['クラウドワークス担当','クラウドワークス','案件の整理・提案文・工数管理','📝'],
+    ['品質検証担当','品質検証・セキュリティ','不具合検証・個人情報保護・既存仕様確認','🛡️']
+  ];
+  const PROJECTS = [
+    ['stamps','LINEスタンプ','🎨','キャラクター・販売・Instagram'],
+    ['swing','WEEKLY SWING LAB','📈','週次スイングの候補と検証'],
+    ['boat','全国BOAT LAB','🚤','全24場予想・結果と回収率'],
+    ['recipe','うちのレシピ帳','🍳','レシピ登録・写真・バックアップ'],
+    ['family','家族の暮らし','🏠','日用品・食品の管理'],
+    ['kids','まなびのぼうけん','🎓','知育コンテンツ'],
+    ['calendar','オリジナルカレンダー','🗓️','家族予定の一覧表示'],
+    ['work','会社用Copilot','🏢','社内許可済みの環境でのみ利用']
+  ];
+  const TEMPLATES = [
+    ['🎨','LINEスタンプ','既存キャラの顔・画風・ポーズ・文字表記・背景透過を維持し、少数試作→検査→量産の順でスタンプを制作したい。'],
+    ['📊','Excel/VBA','既存Excelのレイアウト・数式・マクロ・写真・印刷設定を維持して、変更箇所と未検証事項を分けながら修正したい。'],
+    ['⚡','電気試験','試験の原理・測定条件・判定根拠・安全上の注意を、最新の一次資料で確認しながら整理したい。'],
+    ['💻','アプリ改良','既存仕様と画面を確認し、元の機能を削除せず、最小差分でiPhone/PCに使いやすい改良をしたい。'],
+    ['📈','株式スイング','週次スイング候補について、決算跨ぎ・信用需給・出来高・過熱感を確認し、目標価格と損切り価格の根拠を検証したい。'],
+    ['🚤','ボートレース','オッズと期待値を踏まえて有力レースを抽出し、予想時点を固定して結果照合できる仕組みを改善したい。'],
+    ['🛡️','品質チェック','元仕様との比較、エラー再現条件、回帰テスト、情報漏えいリスクを検証してほしい。'],
+    ['📱','Instagram','LINEスタンプ商品の宣伝リール用に、短い台本・見せ方・投稿文・検証ポイントをまとめてほしい。']
+  ];
+  const STORAGE_KEY='etchan-command-v1';
+  const fallback={tasks:[{id:'std-risk',title:'標準からリスク展開アプリ',done:false}],links:{},hideDone:false};
+  function load(){try{const raw=JSON.parse(localStorage.getItem(STORAGE_KEY));if(raw&&typeof raw==='object'){return {tasks:Array.isArray(raw.tasks)?raw.tasks.filter(x=>x&&typeof x.title==='string').map(x=>({id:String(x.id||Math.random()),title:x.title.slice(0,180),done:!!x.done})).slice(0,500):fallback.tasks,links:raw.links&&typeof raw.links==='object'?raw.links:{},hideDone:!!raw.hideDone}}}catch(e){}return structuredClone(fallback)}
+  let state=load();
+  function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}catch(e){toast('この環境では保存できません。JSONバックアップをご利用ください')}}
+  let toastTimer;function toast(s){const e=document.getElementById('toast');e.textContent=s;e.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>e.classList.remove('show'),2600)}
+  function show(tab){document.querySelectorAll('.view').forEach(e=>e.classList.toggle('hidden',e.id!==tab));document.querySelectorAll('.tab-btn').forEach(b=>{const yes=b.dataset.tab===tab;b.classList.toggle('active',yes);b.setAttribute('aria-selected',yes?'true':'false')});if(tab==='settings')renderSettings();window.scrollTo({top:0,behavior:'smooth'})}
+  document.querySelectorAll('[data-tab],[data-go]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.tab||b.dataset.go)));
+  const el=id=>document.getElementById(id);
+  const mode=el('mode');ROLES.forEach((r,i)=>{const option=document.createElement('option');option.value=String(i);option.textContent=`${String(i+1).padStart(2,'0')} · ${r[0]}（${r[1]}）`;mode.append(option)});
+  function buildPrompt(){const req=el('request').value.trim();if(!req){toast('依頼内容を入力してな');el('request').focus();return}
+    const n=mode.value;const r=n==='auto'?null:ROLES[Number(n)];const role=r?`${r[0]}（${r[1]}）：${r[2]}`:'えっちゃん総括が内容に合わせて16人の専門担当を選定し、最終品質確認を行う';
+    const company=/会社|社内|試験|検査|VBA|Excel|マクロ|納期|勤務|安全|品質|設備/i.test(req);
+    const chunks=[`【担当】${role}`,`【依頼】\n${req}`,`【共通ルール】\n・事実、推測、未確認情報を明確に分け、重要事項は一次資料を確認する。\n・既存仕様、機能、デザイン、保存データを無断で変更・削除しない。\n・変更点、確認手順、検証済み項目、未検証事項を明記する。\n・不明な情報を事実として補わない。`];
+    if(company)chunks.push('【情報保護】\n会社でChatGPTの利用が承認されていない場合、社内ファイル・機密情報・個人情報を入力せず、承認済みのMicrosoft 365 Copilot環境だけで業務を実施する。');
+    chunks.push('【出力】\n最初に目的・影響範囲・必要な作業を簡潔に整理し、可能な作業を進め、検証結果を示す。');
+    el('prompt').value=chunks.join('\n\n');toast('依頼文を作成したで')
+  }
+  el('generate').addEventListener('click',buildPrompt);
+  async function copyText(value){if(!value){toast('コピーする文章がないで');return}try{await navigator.clipboard.writeText(value);toast('コピーしたで')}catch(e){const t=document.createElement('textarea');t.value=value;t.style.position='fixed';t.style.opacity='0';document.body.append(t);t.select();let ok=false;try{ok=document.execCommand('copy')}catch(_){}t.remove();toast(ok?'コピーしたで':'コピーできない環境です。文章を選択してコピーしてください')}}
+  el('copy-prompt').addEventListener('click',()=>copyText(el('prompt').value));
+  el('hero-compose').addEventListener('click',()=>{el('composer').scrollIntoView({behavior:'smooth',block:'start'});el('request').focus()});
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){el('mic').disabled=true;el('mic').title='このブラウザでは音声入力に対応していません'}else{el('mic').addEventListener('click',()=>{try{const recog=new SR();recog.lang='ja-JP';recog.interimResults=false;recog.onresult=e=>{el('request').value=[el('request').value,e.results[0][0].transcript].filter(Boolean).join(' ');toast('音声を入力したで')};recog.onerror=()=>toast('音声入力できませんでした');recog.start();toast('音声を聞き取っています')}catch(e){toast('音声入力を開始できませんでした')}})}
+  function renderTemplates(){const root=el('templates');TEMPLATES.forEach(([emoji,name,value])=>{const b=document.createElement('button');b.className='template';const label=document.createElement('span');label.textContent=`${emoji} ${name}`;const sub=document.createElement('span');sub.className='sub';sub.textContent='依頼文のひな型';b.append(label,sub);b.addEventListener('click',()=>{el('request').value=value;mode.value='auto';el('request').focus();buildPrompt();el('composer').scrollIntoView({behavior:'smooth'})});root.append(b)})}
+  function renderAgents(){const root=el('agent-grid');root.textContent='';ROLES.forEach((r,i)=>{const c=document.createElement('article');c.className='agent';const top=document.createElement('div');top.className='agent-top';const av=document.createElement('div');av.className='avatar';av.textContent=r[3];const info=document.createElement('div');const n=document.createElement('div');n.className='role-num';n.textContent=`NO. ${String(i+1).padStart(2,'0')} / ${r[1]}`;const title=document.createElement('h3');title.textContent=r[0];info.append(n,title);top.append(av,info);const p=document.createElement('p');p.textContent=r[2];const b=document.createElement('button');b.className='btn';b.textContent='この担当に依頼する';b.addEventListener('click',()=>{mode.value=String(i);show('home');el('composer').scrollIntoView({behavior:'smooth'});el('request').focus();toast(`${r[0]}を選択したで`)});c.append(top,p,b);root.append(c)})}
+  function isValidURL(u){try{const x=new URL(u);return x.protocol==='https:'||x.protocol==='http:'}catch{return false}}
+  function renderProjects(){const root=el('project-grid');root.textContent='';let cnt=0;PROJECTS.forEach(([key,name,emoji,desc])=>{const c=document.createElement('article');c.className='project';const head=document.createElement('div');head.className='project-header';const ic=document.createElement('div');ic.className='project-icon';ic.textContent=emoji;const h=document.createElement('div');const title=document.createElement('h3');title.textContent=name;const p=document.createElement('div');p.className='small muted';p.textContent=desc;h.append(title,p);head.append(ic,h);c.append(head);const url=state.links[key]||'';const valid=isValidURL(url);if(valid)cnt++;const status=document.createElement('div');status.className='small muted';status.textContent=valid?'URL設定済み':'URL未設定';const btn=document.createElement('button');btn.className='btn'+(valid?' primary':'');btn.textContent=valid?'アプリを開く ↗':'設定からURLを登録';btn.addEventListener('click',()=>{if(valid)window.open(url,'_blank','noopener,noreferrer');else show('settings')});c.append(status,btn);root.append(c)});el('stat-projects').textContent=cnt}
+  function renderSettings(){const root=el('link-settings');root.textContent='';PROJECTS.forEach(([key,name])=>{const wrap=document.createElement('div');wrap.className='setting-item';const label=document.createElement('span');label.textContent=name;const inp=document.createElement('input');inp.type='url';inp.inputMode='url';inp.className='input';inp.placeholder='https://...';inp.value=state.links[key]||'';inp.dataset.key=key;inp.setAttribute('aria-label',`${name}のURL`);wrap.append(label,inp);root.append(wrap)})}
+  el('save-settings').addEventListener('click',()=>{const links={...state.links};for(const inp of el('link-settings').querySelectorAll('input')){const v=inp.value.trim();if(v&&!isValidURL(v)){toast(`URLの形式を確認してな：${inp.getAttribute('aria-label')}`);inp.focus();return}if(v)links[inp.dataset.key]=v;else delete links[inp.dataset.key]}state.links=links;save();renderProjects();toast('アプリURLを保存したで')});
+  function renderTasks(){const root=el('todo-list');root.textContent='';const tasks=state.tasks.filter(x=>!state.hideDone||!x.done);if(tasks.length===0){const e=document.createElement('div');e.className='empty';e.textContent='表示するToDoはありません';root.append(e)}else tasks.forEach(t=>{const row=document.createElement('div');row.className='todo'+(t.done?' done':'');const cb=document.createElement('input');cb.type='checkbox';cb.className='check';cb.checked=t.done;cb.setAttribute('aria-label',t.title+' 完了');cb.addEventListener('change',()=>{t.done=cb.checked;save();renderTasks()});const title=document.createElement('span');title.className='todo-title';title.textContent=t.title;const rm=document.createElement('button');rm.className='todo-remove';rm.textContent='×';rm.title='削除';rm.setAttribute('aria-label',t.title+' を削除');rm.addEventListener('click',()=>{state.tasks=state.tasks.filter(x=>x.id!==t.id);save();renderTasks();toast('ToDoを削除したで')});row.append(cb,title,rm);root.append(row)});const left=state.tasks.filter(x=>!x.done).length;el('stat-tasks').textContent=left;el('task-count').textContent=`未完了 ${left}件 / 全 ${state.tasks.length}件`;el('hide-done').textContent=state.hideDone?'完了も表示':'完了を非表示'}
+  el('todo-form').addEventListener('submit',e=>{e.preventDefault();const t=el('todo-text').value.trim();if(!t)return;state.tasks.push({id:String(Date.now())+'-'+Math.random().toString(16).slice(2),title:t.slice(0,180),done:false});el('todo-text').value='';save();renderTasks();toast('ToDoを追加したで')});
+  el('hide-done').addEventListener('click',()=>{state.hideDone=!state.hideDone;save();renderTasks()});
+  el('export').addEventListener('click',()=>{const exportData={app:'etchan-command-v1',exportedAt:new Date().toISOString(),data:state};const blob=new Blob([JSON.stringify(exportData,null,2)],{type:'application/json'});const u=URL.createObjectURL(blob);const a=document.createElement('a');a.href=u;a.download=`etchan-ai-backup-${new Date().toISOString().slice(0,10)}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(u),600);toast('バックアップを作成したで')});
+  el('import-btn').addEventListener('click',()=>el('import-file').click());
+  el('import-file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{if(f.size>2_000_000)throw Error('ファイルが大きすぎます');const raw=JSON.parse(await f.text());if(raw.app!=='etchan-command-v1'||!raw.data||!Array.isArray(raw.data.tasks)||typeof raw.data.links!=='object'||raw.data.links===null)throw Error('対応していないバックアップです');if(raw.data.tasks.length>500)throw Error('ToDo件数が多すぎます');const links={};for(const [k,v] of Object.entries(raw.data.links)){if(!PROJECTS.some(p=>p[0]===k))continue;if(typeof v==='string'&&isValidURL(v))links[k]=v.slice(0,2000)}const tasks=raw.data.tasks.map((x,i)=>{if(!x||typeof x.title!=='string')throw Error('ToDoデータが不正です');return{id:String(x.id??i),title:x.title.slice(0,180),done:!!x.done}});if(!confirm('現在のToDoとリンク設定をバックアップで置き換えます。続けますか？'))return;state={tasks,links,hideDone:!!raw.data.hideDone};save();renderTasks();renderProjects();renderSettings();toast('バックアップを復元したで')}catch(err){toast('読込失敗：'+err.message)}finally{e.target.value=''}});
+  renderTemplates();renderAgents();renderProjects();renderTasks();renderSettings();
+  if('serviceWorker' in navigator && location.protocol==='https:'){navigator.serviceWorker.register('./sw.js').catch(()=>{})}
+  </script>
+</body>
+</html>
