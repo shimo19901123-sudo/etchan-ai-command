@@ -9,7 +9,8 @@
   <meta name="apple-mobile-web-app-title" content="AI司令室">
   <meta name="description" content="16人のAI社員・プロジェクト・ToDoを一つにまとめる個人用ダッシュボード">
   <link rel="manifest" href="./manifest.webmanifest">
-  <link rel="apple-touch-icon" href="./icons/icon-180.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./icon-180.png?v=11">
+  <link rel="icon" type="image/png" href="./icon-192.png?v=11">
   <title>えっちゃん AI司令室</title>
   <style>
   :root{--bg:#0a0e1b;--panel:#131a2e;--panel2:#19223a;--border:#293451;--text:#f2f5ff;--muted:#a2aec6;--purple:#9c85ff;--teal:#4de4d1;--danger:#ff8c98;--amber:#f7c571;--radius:18px}
@@ -27,11 +28,12 @@
   @media(max-width:760px){.shell{padding:16px 14px 100px}.topbar{padding:5px 0 18px}.topbar .tag{display:none}.brand h1{font-size:19px}.grid2{grid-template-columns:1fr}.agent-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding:23px 20px}.nav{margin-left:-2px;margin-right:-2px}.tab-btn{min-width:94px;font-size:13px}.panel{padding:16px}}
   @media(max-width:480px){.agent-grid,.project-list,.templates{grid-template-columns:1fr}.setting-item{grid-template-columns:1fr;gap:4px}.agent{min-height:0}.agent p{flex:auto}.topbar .small{display:none}.row>.btn{flex:auto}.schedule-item{align-items:flex-start;flex-direction:column}.schedule-item span{text-align:left}.stat strong{font-size:24px}}
   @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  .mark{background:#061429 url("./icon-192.png?v=11") center/cover no-repeat;color:transparent;font-size:0;border:1px solid #2469ae;box-shadow:0 0 24px #167aff66}
   </style>
 </head>
 <body>
   <div class="shell">
-    <header class="topbar"><div class="brand"><div class="mark">E</div><div><div class="tiny">ETCHAN AI COMPANY</div><h1>えっちゃん AI司令室</h1><div class="small muted">16人のAI社員 × プロジェクト × ToDo</div></div></div><span class="tag"><span class="dot"></span>ローカル管理 v1.0</span></header>
+    <header class="topbar"><div class="brand"><div class="mark" role="img" aria-label="AI司令室アイコン"></div><div><div class="tiny">ETCHAN AI COMPANY</div><h1>えっちゃん AI司令室</h1><div class="small muted">16人のAI社員 × プロジェクト × ToDo</div></div></div><span class="tag"><span class="dot"></span>ローカル管理 v1.1</span></header>
     <nav class="nav" role="tablist" aria-label="画面切り替え">
       <button class="tab-btn active" data-tab="home" role="tab" aria-selected="true">⌂ ホーム</button><button class="tab-btn" data-tab="agents" role="tab" aria-selected="false">✦ AI社員</button><button class="tab-btn" data-tab="projects" role="tab" aria-selected="false">▦ アプリ</button><button class="tab-btn" data-tab="tasks" role="tab" aria-selected="false">☑ ToDo</button><button class="tab-btn" data-tab="settings" role="tab" aria-selected="false">⚙ 設定</button>
     </nav>
@@ -42,7 +44,7 @@
         <div class="grid2">
           <div class="panel" id="composer"><div class="section-top"><h2>✦ AI社員に依頼</h2><span class="badge-local">指示文を生成</span></div>
             <div class="stack" style="gap:12px">
-              <div class="field"><label for="mode">依頼先</label><select id="mode" class="select"><option value="auto">えっちゃん（内容に応じて担当を割り振る）</option></select></div>
+              <div class="field"><label for="mode">依頼先</label><select id="mode" class="select"><option value="auto">総括担当（内容に応じて担当を割り振る）</option></select></div>
               <div class="field"><label for="request">やってほしいこと</label><textarea id="request" class="textarea" placeholder="例：株アプリに目標価格と損切り価格を表示したい。既存機能を維持して修正案を作って。"></textarea></div>
               <div class="row"><button class="btn primary" id="generate">依頼文を作る</button><button class="btn" id="mic" title="対応環境のみ">🎙 音声入力</button></div>
               <div class="field"><label for="prompt">生成した依頼文（内容を確認してから利用）</label><textarea id="prompt" class="textarea" style="min-height:170px" readonly placeholder="ここに依頼文が表示されます"></textarea></div>
@@ -64,27 +66,27 @@
         <div class="panel"><h2 class="section-title">📦 バックアップ・復元</h2><p class="muted small">ToDo・設定URLをJSON形式で保存します。複数端末では自動同期しません。</p><div class="row" style="margin-top:14px"><button class="btn" id="export">バックアップ保存</button><button class="btn" id="import-btn">バックアップ読込</button><input type="file" id="import-file" accept="application/json,.json" hidden></div></div>
         <div class="panel"><h2 class="section-title">🛡️ 安全・対応範囲</h2><p class="muted">この初期版はログインなし・外部DBなし・追跡機能なし。ToDo、リンク設定はこのブラウザの保存領域（localStorage）に保存します。端末のデータ消去で失われる場合があります。機密情報やAPIキーは入力しないでください。</p><p class="muted small" style="margin-top:10px">音声入力はブラウザの音声認識機能が使える場合のみ動作し、処理方法は端末・ブラウザに依存します。会社の機密情報には使用しないでください。</p></div>
       </div></section>
-    </main><footer class="footer">ETCHAN AI COMMAND · v1.0 · 元アプリは変更せず、まず入口から統合</footer>
+    </main><footer class="footer">ETCHAN AI COMMAND · v1.1 · 元アプリは変更せず、まず入口から統合</footer>
   </div><div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script>
   'use strict';
   const ROLES = [
-    ['えっちゃん','総括リーダー','全体統括・要件整理・担当選定・品質判断','👑'],
-    ['玲奈','企画・情報収集','企画立案・情報整理・根拠の確認','🔎'],
-    ['もも','LINEスタンプ制作','キャラクター固定・スタンプ制作・文字・透過確認','🎨'],
-    ['莉子','Instagram運用','リール構成・投稿文・訴求改善','📱'],
-    ['涼香','販売戦略','販売導線・価格・商品訴求の改善','📈'],
-    ['彩音','海外展開','英訳・海外向け商品表現・文化確認','🌏'],
-    ['菜々','商品管理','商品一覧・進捗・素材の管理','🗂️'],
-    ['凛','Excel・VBA','既存関数・マクロ・帳票・印刷設定を保護した改善','📊'],
-    ['千尋','電気試験技術','試験原理・測定条件・安全・規格根拠の検討','⚡'],
-    ['美羽','アプリ開発','iPhone・iPad・PC対応UIと既存機能維持','💻'],
-    ['紬','GitHub・自動化','GitHub管理・Python・自動化・復元手順','🔧'],
-    ['麗華','株式スイング分析','需給・テクニカル・リスク・結果検証','📉'],
-    ['夏希','ボートレース分析','選手・機力・オッズ・期待値・結果検証','🚤'],
-    ['ひまり','楽天ROOM','商品紹介・投稿・導線改善','🛍️'],
+    ['総括担当','総括リーダー','全体統括・要件整理・担当選定・品質判断','👑'],
+    ['企画・情報収集担当','企画・情報収集','企画立案・情報整理・根拠の確認','🔎'],
+    ['LINEスタンプ制作担当','LINEスタンプ制作','キャラクター固定・スタンプ制作・文字・透過確認','🎨'],
+    ['Instagram運用担当','Instagram運用','リール構成・投稿文・訴求改善','📱'],
+    ['販売戦略担当','販売戦略','販売導線・価格・商品訴求の改善','📈'],
+    ['海外展開担当','海外展開','英訳・海外向け商品表現・文化確認','🌏'],
+    ['商品管理担当','商品管理','商品一覧・進捗・素材の管理','🗂️'],
+    ['Excel・VBA担当','Excel・VBA','既存関数・マクロ・帳票・印刷設定を保護した改善','📊'],
+    ['電気試験技術担当','電気試験技術','試験原理・測定条件・安全・規格根拠の検討','⚡'],
+    ['アプリ開発担当','アプリ開発','iPhone・iPad・PC対応UIと既存機能維持','💻'],
+    ['GitHub・自動化担当','GitHub・自動化','GitHub管理・Python・自動化・復元手順','🔧'],
+    ['株式スイング分析担当','株式スイング分析','需給・テクニカル・リスク・結果検証','📉'],
+    ['ボートレース分析担当','ボートレース分析','選手・機力・オッズ・期待値・結果検証','🚤'],
+    ['楽天ROOM担当','楽天ROOM','商品紹介・投稿・導線改善','🛍️'],
     ['クラウドワークス担当','クラウドワークス','案件の整理・提案文・工数管理','📝'],
-    ['品質検証担当','品質検証・セキュリティ','不具合検証・個人情報保護・既存仕様確認','🛡️']
+    ['品質検証・セキュリティ担当','品質検証・セキュリティ','不具合検証・個人情報保護・既存仕様確認','🛡️']
   ];
   const PROJECTS = [
     ['stamps','LINEスタンプ','🎨','キャラクター・販売・Instagram'],
@@ -115,9 +117,9 @@
   function show(tab){document.querySelectorAll('.view').forEach(e=>e.classList.toggle('hidden',e.id!==tab));document.querySelectorAll('.tab-btn').forEach(b=>{const yes=b.dataset.tab===tab;b.classList.toggle('active',yes);b.setAttribute('aria-selected',yes?'true':'false')});if(tab==='settings')renderSettings();window.scrollTo({top:0,behavior:'smooth'})}
   document.querySelectorAll('[data-tab],[data-go]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.tab||b.dataset.go)));
   const el=id=>document.getElementById(id);
-  const mode=el('mode');ROLES.forEach((r,i)=>{const option=document.createElement('option');option.value=String(i);option.textContent=`${String(i+1).padStart(2,'0')} · ${r[0]}（${r[1]}）`;mode.append(option)});
+  const mode=el('mode');ROLES.forEach((r,i)=>{const option=document.createElement('option');option.value=String(i);option.textContent=`${String(i+1).padStart(2,'0')} · ${r[0]}`;mode.append(option)});
   function buildPrompt(){const req=el('request').value.trim();if(!req){toast('依頼内容を入力してな');el('request').focus();return}
-    const n=mode.value;const r=n==='auto'?null:ROLES[Number(n)];const role=r?`${r[0]}（${r[1]}）：${r[2]}`:'えっちゃん総括が内容に合わせて16人の専門担当を選定し、最終品質確認を行う';
+    const n=mode.value;const r=n==='auto'?null:ROLES[Number(n)];const role=r?`${r[0]}：${r[2]}`:'総括担当が内容に合わせて16人の専門担当を選定し、最終品質確認を行う';
     const company=/会社|社内|試験|検査|VBA|Excel|マクロ|納期|勤務|安全|品質|設備/i.test(req);
     const chunks=[`【担当】${role}`,`【依頼】\n${req}`,`【共通ルール】\n・事実、推測、未確認情報を明確に分け、重要事項は一次資料を確認する。\n・既存仕様、機能、デザイン、保存データを無断で変更・削除しない。\n・変更点、確認手順、検証済み項目、未検証事項を明記する。\n・不明な情報を事実として補わない。`];
     if(company)chunks.push('【情報保護】\n会社でChatGPTの利用が承認されていない場合、社内ファイル・機密情報・個人情報を入力せず、承認済みのMicrosoft 365 Copilot環境だけで業務を実施する。');
@@ -131,7 +133,7 @@
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
   if(!SR){el('mic').disabled=true;el('mic').title='このブラウザでは音声入力に対応していません'}else{el('mic').addEventListener('click',()=>{try{const recog=new SR();recog.lang='ja-JP';recog.interimResults=false;recog.onresult=e=>{el('request').value=[el('request').value,e.results[0][0].transcript].filter(Boolean).join(' ');toast('音声を入力したで')};recog.onerror=()=>toast('音声入力できませんでした');recog.start();toast('音声を聞き取っています')}catch(e){toast('音声入力を開始できませんでした')}})}
   function renderTemplates(){const root=el('templates');TEMPLATES.forEach(([emoji,name,value])=>{const b=document.createElement('button');b.className='template';const label=document.createElement('span');label.textContent=`${emoji} ${name}`;const sub=document.createElement('span');sub.className='sub';sub.textContent='依頼文のひな型';b.append(label,sub);b.addEventListener('click',()=>{el('request').value=value;mode.value='auto';el('request').focus();buildPrompt();el('composer').scrollIntoView({behavior:'smooth'})});root.append(b)})}
-  function renderAgents(){const root=el('agent-grid');root.textContent='';ROLES.forEach((r,i)=>{const c=document.createElement('article');c.className='agent';const top=document.createElement('div');top.className='agent-top';const av=document.createElement('div');av.className='avatar';av.textContent=r[3];const info=document.createElement('div');const n=document.createElement('div');n.className='role-num';n.textContent=`NO. ${String(i+1).padStart(2,'0')} / ${r[1]}`;const title=document.createElement('h3');title.textContent=r[0];info.append(n,title);top.append(av,info);const p=document.createElement('p');p.textContent=r[2];const b=document.createElement('button');b.className='btn';b.textContent='この担当に依頼する';b.addEventListener('click',()=>{mode.value=String(i);show('home');el('composer').scrollIntoView({behavior:'smooth'});el('request').focus();toast(`${r[0]}を選択したで`)});c.append(top,p,b);root.append(c)})}
+  function renderAgents(){const root=el('agent-grid');root.textContent='';ROLES.forEach((r,i)=>{const c=document.createElement('article');c.className='agent';const top=document.createElement('div');top.className='agent-top';const av=document.createElement('div');av.className='avatar';av.textContent=r[3];const info=document.createElement('div');const n=document.createElement('div');n.className='role-num';n.textContent=`NO. ${String(i+1).padStart(2,'0')}`;const title=document.createElement('h3');title.textContent=r[0];info.append(n,title);top.append(av,info);const p=document.createElement('p');p.textContent=r[2];const b=document.createElement('button');b.className='btn';b.textContent='この担当に依頼する';b.addEventListener('click',()=>{mode.value=String(i);show('home');el('composer').scrollIntoView({behavior:'smooth'});el('request').focus();toast(`${r[0]}を選択したで`)});c.append(top,p,b);root.append(c)})}
   function isValidURL(u){try{const x=new URL(u);return x.protocol==='https:'||x.protocol==='http:'}catch{return false}}
   function renderProjects(){const root=el('project-grid');root.textContent='';let cnt=0;PROJECTS.forEach(([key,name,emoji,desc])=>{const c=document.createElement('article');c.className='project';const head=document.createElement('div');head.className='project-header';const ic=document.createElement('div');ic.className='project-icon';ic.textContent=emoji;const h=document.createElement('div');const title=document.createElement('h3');title.textContent=name;const p=document.createElement('div');p.className='small muted';p.textContent=desc;h.append(title,p);head.append(ic,h);c.append(head);const url=state.links[key]||'';const valid=isValidURL(url);if(valid)cnt++;const status=document.createElement('div');status.className='small muted';status.textContent=valid?'URL設定済み':'URL未設定';const btn=document.createElement('button');btn.className='btn'+(valid?' primary':'');btn.textContent=valid?'アプリを開く ↗':'設定からURLを登録';btn.addEventListener('click',()=>{if(valid)window.open(url,'_blank','noopener,noreferrer');else show('settings')});c.append(status,btn);root.append(c)});el('stat-projects').textContent=cnt}
   function renderSettings(){const root=el('link-settings');root.textContent='';PROJECTS.forEach(([key,name])=>{const wrap=document.createElement('div');wrap.className='setting-item';const label=document.createElement('span');label.textContent=name;const inp=document.createElement('input');inp.type='url';inp.inputMode='url';inp.className='input';inp.placeholder='https://...';inp.value=state.links[key]||'';inp.dataset.key=key;inp.setAttribute('aria-label',`${name}のURL`);wrap.append(label,inp);root.append(wrap)})}
